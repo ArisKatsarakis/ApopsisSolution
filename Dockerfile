@@ -1,5 +1,12 @@
-FROM arch:latest
+FROM --platform=linux/amd64 archlinux:latest
 
-RUN packman -Syu --no-confirm
+RUN pacman -Syyu --noconfirm
+RUN pacman -S ttf-jetbrains-mono-nerd --noconfirm
+RUN pacman -S git neovim gcc gdb ripgrep lazygit fd unzip tmux --noconfirm
+RUN pacman -S jdk8-openjdk maven  --noconfirm
+RUN mkdir /root/.config
 
-ENTRYPOINT ['/bin/bash']
+COPY nvim /root/.config/nvim
+COPY ./.tmux.conf /root/.tmux.conf
+
+ENTRYPOINT ["/bin/sh"]
