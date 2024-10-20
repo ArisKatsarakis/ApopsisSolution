@@ -12,14 +12,13 @@ import javax.ws.rs.core.Response;
 
 import org.example.entities.Student;
 
-
 /**
  * HelloResource
  */
 @Path("/hello")
 public class HelloResource {
 
-  @GET 
+  @GET
   @Produces(MediaType.APPLICATION_JSON)
   public Response sayHello() {
     Student student = new Student();
@@ -41,7 +40,7 @@ public class HelloResource {
     student.setLastName("Katsarakis");
     Date dateOfBirth = new Date(1993, 11, 22);
     student.setDateOfBirth(dateOfBirth.toString());
-    List<Student> students = new  ArrayList<>();
+    List<Student> students = new ArrayList<>();
     students.add(student);
     return Response.ok(Response.Status.OK).entity(students).build();
   }
