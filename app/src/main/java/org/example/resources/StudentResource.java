@@ -36,7 +36,8 @@ public class StudentResource {
   @POST
   @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
   @Produces(MediaType.APPLICATION_JSON)
-  public Response createStudentForm(@FormParam("lastName") String lastName, @FormParam("firstName") String firstName, @FormParam("dateOfBirth") String dateOfBirth) {
+  public Response createStudentForm(@FormParam("lastName") String lastName, @FormParam("firstName") String firstName,
+      @FormParam("dateOfBirth") String dateOfBirth) {
     Student student = new Student();
     student.setLastName(lastName);
     student.setFirstName(firstName);
@@ -66,6 +67,25 @@ public class StudentResource {
   @PUT
   @Path("/{id}")
   @Produces(MediaType.APPLICATION_JSON)
+  @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+  public Response updateStudent(@PathParam("id") int id, @FormParam("lastName") String lastName,
+      @FormParam("firstName") String firstName,
+      @FormParam("dateOfBirth") String dateOfBirth) {
+    Student student = new Student();
+    student.setStudentId(id);
+    student.setFirstName(firstName);
+    student.setLastName(lastName);
+    student.setDateOfBirth(dateOfBirth);
+    Student studentUpdated = jdbc.updateStudentById(id, student);
+    if (studentUpdated.getFirstName() == null) {
+      return Response.noContent().status(Response.Status.NOT_FOUND).build();
+    }
+    return Response.ok().entity(studentUpdated).build();
+  }
+
+  @PUT
+  @Path("/{id}")
+  @Produces(MediaType.APPLICATION_FORM_URLENCODED)
   public Response updateStudent(@PathParam("id") int id, Student student) {
     Student studentUpdated = jdbc.updateStudentById(id, student);
     if (studentUpdated.getFirstName() == null) {

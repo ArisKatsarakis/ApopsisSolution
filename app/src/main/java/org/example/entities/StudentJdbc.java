@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,8 @@ import java.util.List;
  */
 public class StudentJdbc {
 
+  String dateString = "2024-10-19"; // Example date string
+  DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
   // JDBC settings
   String url = "jdbc:postgresql://localhost:5438/postgres";
   String user = "postgres";
@@ -91,7 +94,7 @@ public class StudentJdbc {
       PreparedStatement preparedStatement = con.prepareStatement(prepareInsertStatement);
       preparedStatement.setString(1, student.getFirstName());
       preparedStatement.setString(2, student.getLastName());
-      Date dateOfBirth = Date.valueOf(LocalDate.of(2022, 11, 11));
+      Date dateOfBirth = Date.valueOf(LocalDate.parse(student.getDateOfBirth(), formatter));
       preparedStatement.setDate(3, dateOfBirth);
 
       System.out.println("JDBC Executing Query: ");
@@ -156,7 +159,7 @@ public class StudentJdbc {
       PreparedStatement statement = con.prepareStatement(updateStudentByID);
       statement.setString(1, student.getFirstName());
       statement.setString(2, student.getLastName());
-      statement.setDate(3, Date.valueOf(LocalDate.now()));
+      statement.setDate(3, Date.valueOf(LocalDate.parse(student.getDateOfBirth(), formatter)));
       statement.setInt(4, id);
       System.out.println("EXECUTING QUERY: ");
       System.out.println(statement.toString());
@@ -184,7 +187,7 @@ public class StudentJdbc {
       System.out.println(e.getMessage());
       return new Student();
     }
-   return null;
+    return null;
   }
 
 }

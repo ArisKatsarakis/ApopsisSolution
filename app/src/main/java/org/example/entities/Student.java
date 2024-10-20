@@ -1,5 +1,9 @@
 package org.example.entities;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Student
  */
@@ -8,6 +12,9 @@ public class Student {
   private String firstName;
   private String lastName;
   private String dateOfBirth;
+
+  @JsonIgnore
+  private List<StudentDocument> listOfFiles;
 
   public Student() {
   }
@@ -42,6 +49,14 @@ public class Student {
 
   public void setStudentId(int studentId) {
     this.studentId = studentId;
+  }
+
+  public List<StudentDocument> getListOfFiles() {
+    return listOfFiles;
+  }
+
+  public void setListOfFiles(List<StudentDocument> listOfFiles) {
+    this.listOfFiles = listOfFiles;
   }
 
 }
