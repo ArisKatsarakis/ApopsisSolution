@@ -1,0 +1,24 @@
+# version: '3'
+# services:
+#   postgresdb:
+#     image: postgres:14.1-alpine
+#     restart: always
+#     container_name: postgresdb
+#     env_file: .env
+#     ports:
+#       - '5438:5432'
+#     volumes:
+#       - db:/var/lib/postgresql/data
+# volumes:
+#   db:
+# # Use root/example as user/password credentials
+version: '3.1'
+services:
+
+  db:
+    image: mysql
+    restart: always
+    env_file: .env
+    ports:
+      - '3308:3306'
+    # (this is just an example, not intended to be a production configuration)
