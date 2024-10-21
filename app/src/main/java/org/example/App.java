@@ -35,8 +35,8 @@ public class App {
     try {
       server.start();
       System.out.println("Server started at http://localhost:8080/");
-      // jdbc.createStudentTable();
-      // documentJdbc.createDocumetsTable();
+      jdbc.createStudentTable();
+      documentJdbc.createDocumetsTable();
       server.join();
     } catch (Exception e) {
       System.out.println(e.getMessage());

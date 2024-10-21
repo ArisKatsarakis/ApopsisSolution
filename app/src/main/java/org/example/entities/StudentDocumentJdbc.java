@@ -13,18 +13,18 @@ import java.util.List;
  */
 public class StudentDocumentJdbc {
 
-  static String url = "jdbc:postgresql://localhost:5438/postgres";
-  static String user = "postgres";
-  static String password = "postgres";
+  static String url = "jdbc:mysql://localhost:3308/apopsis?allowPublicKeyRetrieval=true&useSSL=false";
+  static String user = "root";
+  static String password = "password";
 
   String createTableQuery = new StringBuilder()
       .append("CREATE TABLE documents_students (")
-      .append("document_id BIGSERIAL NOT NULL,  ")
+      .append("document_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,  ")
       .append("fileName varchar(100),")
       .append("content varchar(4000),")
-      .append("students_id integer, ")
-      .append("CONSTRAINT document_student FOREIGN KEY (students_id ) ")
-      .append("REFERENCES students(students_id )")
+      .append("students_id integer,  ")
+      .append("CONSTRAINT document_student FOREIGN KEY (students_id) ")
+      .append("REFERENCES students(students_id) ")
       .append(");")
       .toString();
 

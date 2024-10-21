@@ -19,11 +19,11 @@ public class StudentJdbc {
   String dateString = "2024-10-19"; // Example date string
   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
   // JDBC settings
-  String url = "jdbc:postgresql://localhost:5438/postgres";
-  String user = "postgres";
-  String password = "postgres";
+  String url = "jdbc:mysql://localhost:3308/apopsis?allowPublicKeyRetrieval=true&useSSL=false";
+  String user = "root";
+  String password = "password";
   String createTableQuery = new StringBuilder().append("CREATE TABLE students  (")
-      .append("students_id  BIGSERIAL PRIMARY KEY,")
+      .append("students_id  integer NOT NULL AUTO_INCREMENT PRIMARY KEY,")
       .append("firstName varchar(100),")
       .append("lastName varchar(100),")
       .append("dateOfBirth varchar(100)")
@@ -57,6 +57,7 @@ public class StudentJdbc {
   String deleteStudentById = new StringBuilder()
       .append("DELETE FROM students where students_id = ?;")
       .toString();
+  private StudentDocumentJdbc documentJdbc = new StudentDocumentJdbc();
 
   public int createStudentTable() throws Exception {
     try {
@@ -102,7 +103,7 @@ public class StudentJdbc {
       preparedStatement.execute();
     } catch (Exception e) {
       System.out.println("JDBC EXCEPTIONS ");
-      System.out.println(e.getStackTrace());
+      System.out.println(e.getMessage());
     }
     return null;
   }
@@ -120,6 +121,7 @@ public class StudentJdbc {
         student.setFirstName(set.getString(2));
         student.setLastName(set.getString(3));
         student.setDateOfBirth(set.getDate(4).toLocalDate().toString());
+        student.setListOfFiles(documentJdbc.getDocumentsForStudents(student.getStudentId()));
         students.add(student);
       }
     } catch (Exception e) {
@@ -144,6 +146,7 @@ public class StudentJdbc {
         student.setFirstName(set.getString(2));
         student.setLastName(set.getString(3));
         student.setDateOfBirth(set.getDate(4).toLocalDate().toString());
+        student.setListOfFiles(documentJdbc.getDocumentsForStudents(student.getStudentId()));
       }
     } catch (Exception e) {
       System.out.println("JDBC EXCEPTIONS ");
