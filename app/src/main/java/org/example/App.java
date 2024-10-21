@@ -6,6 +6,7 @@ import org.eclipse.jetty.servlet.ServletHolder;
 import org.example.entities.StudentDocumentJdbc;
 import org.example.entities.StudentJdbc;
 import org.example.resources.DocumentResource;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
 
@@ -20,6 +21,7 @@ public class App {
     ResourceConfig config = new ResourceConfig();
     config.packages("org.example.resources"); // Package containing resources
     config.register(DocumentResource.class);
+    config.register(MultiPartFeature.class);
     ServletHolder servlet = new ServletHolder(new ServletContainer(config));
     // Set the servlet context
     ServletContextHandler context = new ServletContextHandler(server, "/");
