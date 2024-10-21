@@ -75,4 +75,276 @@ Input : {
   Document Entity
 }
 Response:[]
+VERB: DELETE
+Description: deletes a document where document_id = documentId to the student with students_id = studentId
+Response:[]
 ```
+
+- Test 2 Frontend skills
+I have develops the layout.js that has 2 implementations:
+- Vanilla JS
+- JQuery
+
+In order to test the js you open the layout.html in chrome, then you open console. 
+While in console you paste the following:
+```json
+layout = {
+        "pages": [
+            {
+                "description": {
+                    "el_GR": "description in Greek",
+                    "en_US": "description in English"
+                },
+                "rows": [
+                    {
+                        "columns": [
+                            {
+                                "size": 6, "fieldNames": [
+                                    "RequestId"
+                                ]
+                            },
+                            {
+                                "size": 6,
+                                "fieldNames": [
+                                    "ManagerID"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "columns": [
+                            {
+                                "size": 6,
+                                "fieldNames": [
+                                    "RequestType"
+                                ]
+                            },
+                            {
+                                "size": 6,
+                                "fieldNames": [
+                                    "ActType"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "columns": [
+                            {
+                                "size": 6,
+                                "fieldNames": [
+                                    "RequestStatus"
+                                ]
+                            },
+                            {
+                                "size": 6,
+                                "fieldNames": [
+                                    "DateOfSubmission"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "columns": [
+                            {
+                                "size": 6,
+                                "fieldNames": [
+                                    "Municipality"
+                                ]
+                            },
+                            {
+                                "size": 6,
+                                "fieldNames": [
+                                    "BuildingServices"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "columns": [
+                            {
+                                "size": 12,
+                                "fieldNames": [
+                                    "ProjectDescription"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "columns": [
+                            {
+                                "size": 6,
+                                "fieldNames": [
+                                    "DateOfIssue"
+                                ]
+                            },
+                            {
+                                "size": 6,
+                                "fieldNames": [
+                                    "ValidUpTo"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "columns": [
+                            {
+                                "size": 6,
+                                "fieldNames": [
+                                    "ActID"
+                                ]
+                            },
+                            {
+                                "size": 6,
+                                "fieldNames": [
+                                    "ProtocolNumber"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "columns": [
+                            {
+                                "size": 6,
+                                "fieldNames": [
+                                    "ApplicationKey"
+                                ]
+                            },
+                            {
+                                "size": 6,
+                                "fieldNames": [
+                                    "ProtocolDate"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "columns": [
+                            {
+                                "size": 12,
+                                "fieldNames": [
+                                    "WithinPlan"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "columns": [
+                            {
+                                "size": 6,
+                                "fieldNames": [
+                                    "Street"
+                                ]
+                            },
+                            {
+                                "size": 3,
+                                "fieldNames": [
+                                    "NumberFrom"
+                                ]
+                            },
+                            {
+                                "size": 3,
+                                "fieldNames": [
+                                    "NumberTo"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "columns": [
+                            {
+                                "size": 3,
+                                "fieldNames": [
+                                    "Floor"
+                                ]
+                            },
+                            {
+                                "size": 3,
+                                "fieldNames": [
+                                    "City"
+                                ]
+                            },
+                            {
+                                "size": 3,
+                                "fieldNames": [
+                                    "PostalCode"
+                                ]
+                            },
+                            {
+                                "size": 3,
+                                "fieldNames": [
+                                    "MunicipalUnit"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "columns": [
+                            {
+                                "size": 6,
+                                "fieldNames": [
+                                    "CityBlock"
+                                ]
+                            },
+                            {
+                                "size": 6,
+                                "fieldNames": [
+                                    "NationalLandRegistryCodeNumber"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "columns": [
+                            {
+                                "size": 12,
+                                "fieldNames": [
+                                    "GeospatialIdentification"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "columns": [
+                            {
+                                "size": 12,
+                                "fieldNames": [
+                                    "Comments"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "columns": [
+                            {
+                                "size": 12,
+                                "fieldNames": [
+                                    "GoogleMapsAddress"
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "columns": [
+                            {
+                                "size": 12,
+                                "fieldNames": [
+                                    "Locations"
+                                ]
+                            }
+                        ]
+                    }
+                ],
+                "title": {
+                    "el_GR": "Title in Greek",
+                    "en_US": "Title in English"
+                }
+            }
+        ],
+        "paginationMode": "single-page",
+        "defaultLanguageId": "en_US"
+    }
+```
+Then you call the functions: 
+- generateFormLayout(layout)
+- generateFormLayoutJquery(layout)
+you can watch the changes on the html. 

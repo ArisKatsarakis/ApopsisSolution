@@ -1,4 +1,5 @@
 {
+    "layout": {
         "pages": [
             {
                 "description": {
@@ -253,4 +254,5 @@
         ],
         "paginationMode": "single-page",
         "defaultLanguageId": "en_US"
+    }
 }
