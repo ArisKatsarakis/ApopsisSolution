@@ -101,6 +101,7 @@ public class StudentResource {
     Student studentDeleted = jdbc.deleteStudentById(id);
     if (studentDeleted != null) {
       return Response.noContent().status(Response.Status.NOT_FOUND).build();
+
     }
     return Response.ok().status(Response.Status.OK).build();
   }

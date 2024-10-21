@@ -33,8 +33,8 @@ public class StudentDocumentJdbc {
       .toString();
 
   String insertDocumentQuery = new StringBuilder()
-      .append("INSERT INTO TABBLE documents_students ")
-      .append("(filename, conntent, students_id) ")
+      .append("INSERT INTO  documents_students ")
+      .append("(filename, content, students_id) ")
       .append("VALUES ( ?,  ?, ?); ")
       .toString();
 
@@ -66,13 +66,13 @@ public class StudentDocumentJdbc {
     }
   }
 
-  public void insertDocumentInTable(StudentDocument sDocument, int studentId) throws Exception {
+  public void insertDocumentInTable(StudentDocument sDocument) throws Exception {
     try {
       Connection con = DriverManager.getConnection(url, user, password);
       PreparedStatement preparedStatement = con.prepareStatement(insertDocumentQuery);
       preparedStatement.setString(1, sDocument.getFileName());
       preparedStatement.setString(2, sDocument.getContent());
-      preparedStatement.setInt(3, studentId);
+      preparedStatement.setInt(3, sDocument.getStudentId());
       System.out.println("EXECUTING QUERY");
       System.out.println(preparedStatement.toString());
       preparedStatement.execute();
@@ -121,6 +121,25 @@ public class StudentDocumentJdbc {
       System.out.println("JDBD EXCEPTIONS");
       throw e;
     }
+  }
+
+  public StudentDocument updateDocument(StudentDocument sDocument) throws Exception {
+    try {
+      Connection con = DriverManager.getConnection(url, user, password);
+      PreparedStatement preparedStatement = con.prepareStatement(updateDocumentQuery);
+      preparedStatement.setString(1, sDocument.getFileName());
+      preparedStatement.setString(2, sDocument.getContent());
+      preparedStatement.setInt(3, sDocument.getStudentDodumentId());
+      System.out.println("EXECUTING QUERY");
+      System.out.println(preparedStatement.toString());
+      preparedStatement.execute();
+      preparedStatement.close();
+      con.close();
+    } catch (Exception e) {
+      System.out.println("JDBC EXCEPTIONS");
+      throw e;
+    }
+    return sDocument;
   }
 
 }
