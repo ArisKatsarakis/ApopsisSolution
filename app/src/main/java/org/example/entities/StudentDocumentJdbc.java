@@ -45,6 +45,16 @@ public class StudentDocumentJdbc {
       .append(" where document_id = ? ")
       .toString();
 
+  String selectByStudentsIdAndDocumentId = new StringBuilder()
+      .append(" SELECT *  FROM documents_students WHERE")
+      .append("  document_id = ? AND students_id = ?  ")
+      .toString();
+
+  String deleteDocumentQuery = new StringBuilder()
+      .append(" DELETE FROM documents_students WHERE")
+      .append("  document_id = ? AND students_id = ?  ")
+      .toString();
+
   String selectDocumentsByStudentsIQuery = new StringBuilder()
       .append("SELECT * FROM documents_students ")
       .append("where students_id = ? ;")
@@ -133,6 +143,49 @@ public class StudentDocumentJdbc {
       System.out.println("EXECUTING QUERY");
       System.out.println(preparedStatement.toString());
       preparedStatement.execute();
+      preparedStatement.close();
+      con.close();
+    } catch (Exception e) {
+      System.out.println("JDBC EXCEPTIONS");
+      throw e;
+    }
+    return sDocument;
+  }
+
+  public void deleteDocument(int studentId, int documentId) throws Exception {
+    try {
+      Connection con = DriverManager.getConnection(url, user, password);
+      PreparedStatement preparedStatement = con.prepareStatement(deleteDocumentQuery);
+      preparedStatement.setInt(1, documentId);
+      preparedStatement.setInt(2, studentId);
+      System.out.println("EXECUTING QUERY");
+      System.out.println(preparedStatement.toString());
+      preparedStatement.execute();
+      preparedStatement.close();
+      con.close();
+    } catch (Exception e) {
+      System.out.println("JDBC EXCEPTIONS");
+      throw e;
+    }
+
+  }
+
+  public StudentDocument getDocumentByStudentAndDocumentId(int studentId, int documentId) throws Exception {
+    StudentDocument sDocument = new StudentDocument();
+    try {
+      Connection con = DriverManager.getConnection(url, user, password);
+      PreparedStatement preparedStatement = con.prepareStatement(selectByStudentsIdAndDocumentId);
+      preparedStatement.setInt(1, documentId);
+      preparedStatement.setInt(2, studentId);
+      System.out.println("EXECUTING QUERY");
+      System.out.println(preparedStatement.toString());
+      ResultSet set = preparedStatement.executeQuery();
+      while (set.next()) {
+        sDocument.setStudentDodumentId(set.getInt("document_id"));
+        sDocument.setStudentId(set.getInt("students_id"));
+        sDocument.setFileName(set.getString("fileName"));
+        sDocument.setContent(set.getString("content"));
+      }
       preparedStatement.close();
       con.close();
     } catch (Exception e) {

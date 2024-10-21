@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -108,5 +109,35 @@ public class DocumentResource {
     }
 
     return Response.ok().entity(null).status(Response.Status.OK).build();
+  }
+
+  @DELETE
+  @Path("/{id}/documents/{documentId}")
+  @Consumes(MediaType.MULTIPART_FORM_DATA)
+  @Produces(MediaType.APPLICATION_JSON)
+  public Response deleteStudentDocumentByDocumentId(@PathParam("id") int studentId,
+      @PathParam("documentId") int documentId) {
+
+    try {
+      StudentDocument sDocument = jdbc.getDocumentByStudentAndDocumentId(studentId, documentId);
+      String uploadFilePath = "uploads/" + sDocument.getFileName();
+      File file = new File(uploadFilePath);
+      if (file.exists()) {
+        file.delete();
+        jdbc.deleteDocument(studentId, documentId);
+      } else {
+        throw new Exception("file not found");
+      }
+    } catch (Exception e) {
+      ErrorResponse error = new ErrorResponse();
+      if (e.getMessage().equals("file not found")) {
+        error.setError("file not found");
+        return Response.ok().entity(error).status(Response.Status.NOT_FOUND).build();
+      }
+      error.setError(e.getMessage());
+      return Response.ok().entity(error).status(Response.Status.INTERNAL_SERVER_ERROR).build();
+    }
+    return Response.ok().status(Response.Status.OK).build();
+
   }
 }
